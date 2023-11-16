@@ -13,9 +13,16 @@ export async function POST(req: NextRequest, res: NextResponse) {
     });
 
     if (!user) {
-      return new NextResponse("Invalid credentials", {
+      return new NextResponse("Invalid username or password.Please try again.", {
         status: 401,
       });
+    } else {
+      const isPasswordCorrect = user?.password === body?.password;
+      if (!isPasswordCorrect) {
+        return new NextResponse("Invalid username or password.Please try again.", {
+          status: 401,
+        });
+      }
     }
 
     const token = jwt.sign({ userId: user?.email }, "JWT_SECRET", {
@@ -27,9 +34,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
       token,
     });
   } catch (error) {
-    return NextResponse.json({
-      status: 500,
-      message: error,
-    });
+    return NextResponse.json(
+      { message: error },
+      {
+        status: 500,
+      },
+    );
   }
 }

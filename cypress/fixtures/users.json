@@ -1,0 +1,14 @@
+{
+  "validUser": {
+    "email": "admin@yahoo.com",
+    "password": "123456"
+  },
+  "invalidUserEmail": {
+    "email": "admin3@yahoo.com",
+    "password": "12345"
+  },
+  "invalidUserPassword": {
+    "email": "admin@yahoo.com",
+    "password": "12345"
+  }
+}
